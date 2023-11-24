@@ -12,7 +12,6 @@ const updateClient = async (req,res) => {
         const customer = {name,last_name,email,phone_number}
         openpay?.customers?.update(id,customer,(err,response) => {
             if (err) return res.status(500).json({message:'Error Updating Client'})
-            console.log(`UPDATE clientes SET name='${name}',last_name='${last_name}',email='${email}',phone_number='${phone_number}' WHERE id='${id}'`)
             conn.query(`UPDATE clientes SET name='${name}',last_name='${last_name}',email='${email}',phone_number='${phone_number}' WHERE id='${id}'`,(err,results,fields) => {
                 if (err) return res.status(500).json({message:'Error Executing Query'})
                 return res.status(200).json(response)

@@ -4,10 +4,8 @@ const morgan = require('morgan')
 const clientRoutes = require('../routes/clientRoutes')
 const chargeRoutes = require('../routes/chargeRoutes')
 const conn = require('./database')
-const Openpay = require('openpay');
 require('dotenv').config()
 
-const{ID_OP,API_KEY_OP} = process.env
 
 
 const server = express()
@@ -19,7 +17,7 @@ server.use(express.json())
 server.use('/client',clientRoutes)
 server.use('/charges',chargeRoutes)
 
-const openpay = new Openpay(ID_OP,API_KEY_OP);
+
 
 conn.connect((err) => {
     if (err) {
@@ -32,4 +30,4 @@ conn.connect((err) => {
     }
   });
 
-module.exports = openpay
+
