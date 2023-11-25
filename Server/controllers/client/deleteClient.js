@@ -13,7 +13,7 @@ const deleteClient = async (req,res) => {
             if (err) return res.status(500).json({message:'Error Deleting Client'})
             conn.query(`DELETE FROM clientes where id = '${id}'`,(err,results,fields) => {
                 if (err) return res.status(500).json({message:'Error Executing Query'})
-                return res.status(200).json({message:'Client Deleted'})
+                return res.status(204).json({message:'Client Deleted'})
             })
         })
     } catch (error) {

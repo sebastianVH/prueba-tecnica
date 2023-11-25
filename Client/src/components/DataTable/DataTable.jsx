@@ -5,8 +5,7 @@ import { styled } from '@mui/material/styles';
 import { useClientStore } from '../../store/clientStore';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
+
 
 
 const StyledGridOverlay = styled('div')(({ theme }) => ({
@@ -82,7 +81,7 @@ function CustomNoRowsOverlay() {
 }
 
 
-export default function DataTable({handleTheme,theme}) {
+export default function DataTable() {
 
    const {clients,getAllClients,deleteClient,updateClient} = useClientStore()
 
@@ -116,8 +115,15 @@ export default function DataTable({handleTheme,theme}) {
             }).then(async (result) => {
               /* Read more about isConfirmed, isDenied below */
               if (result.isConfirmed) {
-                await deleteClient(params.id);
-                Swal.fire("Success","Client Deleted successFully",'success')
+                try {
+                  const response = await deleteClient(params.id);
+
+                  Swal.fire("Success",response,'success')
+                  
+                } catch (error) {
+                  console.log(error);
+                  Swal.fire("Error",error,'error')
+                }
               } else if (result.isDenied) {
                 Swal.fire("Delete Cancelled", "", "error");
               }
@@ -143,10 +149,14 @@ export default function DataTable({handleTheme,theme}) {
             }).then(async (result) => {
               /* Read more about isConfirmed, isDenied below */
               if (result.isConfirmed) {
-                await updateClient(params.row)
-                Swal.fire("Client Updated", "", "success");
+                try {
+                  await updateClient(params.row)
+                  Swal.fire("Client Updated", "", "success");   
+                } catch (error) {
+                  Swal.fire("Error", error, "error");
+                }
               } else if (result.isDenied) {
-                Swal.fire("Updated Cancelled","", "error");
+                Swal.fire("Update Cancelled","", "error");
               }
             });
           }}
@@ -156,7 +166,6 @@ export default function DataTable({handleTheme,theme}) {
       </>
       )},
   ];
-
 
 
     useEffect(() => {
@@ -172,9 +181,7 @@ export default function DataTable({handleTheme,theme}) {
     
   return (
     <div style={{ height: '80%', width: '100%' }}>
-      <Button onClick={handleTheme}>
-        {theme ==='light' ? <Brightness4Icon /> : <Brightness7Icon />}
-      </Button>
+
       <Link to='/createClient'> 
       <Button variant="outlined" color='primary' sx={{my:3,mx:10}}>Create Client</Button>
       </Link>

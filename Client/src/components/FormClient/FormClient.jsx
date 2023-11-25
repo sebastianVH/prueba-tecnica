@@ -18,9 +18,10 @@ export default function FormClient() {
         try {
             await createClient(formdata)
             Swal.fire("Success","Client Created successFully",'success')
-            .then(navigate('/'))
+            .then(navigate('/home'))
         } catch (error) {
-            Swal.fire("Error","Error creating client",'error');
+            console.log(error);
+            Swal.fire("Error",error,'error');
         }
     };
 
@@ -78,7 +79,7 @@ export default function FormClient() {
             <Button type='reset' variant="contained" color='error' endIcon={<CloseIcon/>}>
                     Reset
             </Button>
-            <Link to='/'>
+            <Link to='/home'>
                 Return to home
             </Link>
         </Box>

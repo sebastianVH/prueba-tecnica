@@ -20,10 +20,9 @@ export default function FormCharge() {
         try {
             await createCharge(formdata)
             Swal.fire("Success", "Charge Created successFully", 'success')
-                .then(navigate('/'))
+                .then(navigate('/home'))
         } catch (error) {
-            console.log(error);
-            Swal.fire("Error", "Error creating charge", 'error');
+            Swal.fire("Error", error, 'error');
         }
     };
 
@@ -84,7 +83,7 @@ export default function FormCharge() {
             <Button type='reset' variant="contained" color='error' endIcon={<CloseIcon />}>
                 Reset
             </Button>
-            <Link to='/'>
+            <Link to='/home'>
                 Return to home
             </Link>
         </Box>
