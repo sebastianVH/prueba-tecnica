@@ -5,7 +5,7 @@ import firebaseCreateAccount from "../services/FirebaseCreateAccount";
 
 const useClientStore = create((set) => ({
   clients: [],
-  isLogged: false,
+  isLogged: JSON.parse(localStorage.getItem('auth')),
   user:"",
   getAllClients: async () => {
     try {
@@ -44,7 +44,8 @@ const useClientStore = create((set) => ({
     }
   },
   setLoginStatus: (status) => {
-    set({ isLogged: status });
+    localStorage.setItem('auth',JSON.stringify(status))
+    set(()=> ({ isLogged: JSON.parse(localStorage.getItem('auth')) }));
   },
   loginUser: async (formdata) => {
     try {

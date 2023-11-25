@@ -86,10 +86,10 @@ export default function DataTable() {
    const {clients,getAllClients,deleteClient,updateClient} = useClientStore()
 
    const columns = [
-    { field: 'name', headerName: 'Name', width: 200,editable: true },
-    { field: 'last_name', headerName: 'Last name', width: 200,editable: true  },
-    { field: 'email', headerName: 'E-Mail', width: 250,editable: true },
-    { field: 'phone_number', headerName: 'Phone Number', sortable:false, width: 200,editable: true },
+    { field: 'name', headerName: 'Name', width: 200,editable: true,description: 'Haga click para editar esta celda.' },
+    { field: 'last_name', headerName: 'Last name', width: 200,editable: true,description: 'Haga click para editar esta celda.'  },
+    { field: 'email', headerName: 'E-Mail', width: 250,editable: true,description: 'Haga click para editar esta celda.' },
+    { field: 'phone_number', headerName: 'Phone Number', sortable:false, width: 200,editable: true,description: 'Haga click para editar esta celda.' },
     { field: 'actions', 
     width: 200,
     headerName: 'Actions', 

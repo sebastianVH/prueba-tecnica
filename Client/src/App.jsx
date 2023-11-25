@@ -34,7 +34,7 @@ function App() {
 
   useEffect(() => {
     !isLogged && navigate('/')
-  }, [clients,isLogged,navigate]);
+  }, [clients,navigate,isLogged]);
 
 
   return (

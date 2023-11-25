@@ -69,6 +69,7 @@ export default function FormClient() {
                 id="outlined-basic"
                 label="Phone Number"
                 variant="outlined"
+                type='tel'
                 helperText={errors.phone_number && "Phone required"}
                 {...register("phone_number", { required: true, maxLength: 12 })}
             />

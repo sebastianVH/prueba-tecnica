@@ -22,7 +22,6 @@ export default function Login() {
                 navigate('/home')
             }
         } catch (error) {
-            console.log(error);
             Swal.fire("Error","User/Password not valid",'error');
         }
     };
@@ -45,9 +44,8 @@ export default function Login() {
     }
 
     useEffect(() => {
-        console.log(isLogged);
-        isLogged && navigate('/home')
-    }, []);
+        !isLogged && navigate('/')
+    }, [isLogged,navigate]);
 
     return (login ? 
         <Box
